@@ -4,7 +4,6 @@ use rusqlite::{params, Connection, Result};
 use std::fs::File;
 use std::io::BufReader;
 
-
 // modifies column names to be valid in SQL
 fn modify_name(name: String) -> String {
     let mut new_name = name;
@@ -16,7 +15,7 @@ fn modify_name(name: String) -> String {
             new_name = format!("{}{}", &new_name[1..], &new_name[0..1]);
         }
     }
-    
+
     if new_name.is_empty() {
         new_name = "ID".to_string();
     }
@@ -35,9 +34,9 @@ pub fn create_and_load_db(
 
     // Some column names are not valid in SQL, so we need to adjust them
     let mut column_names: Vec<String> = headers
-    .iter()
-    .map(|name| modify_name(name.to_string()))
-    .collect();
+        .iter()
+        .map(|name| modify_name(name.to_string()))
+        .collect();
 
     // Some column names are not valid in SQL, so we need to replace them
     let chars_to_replace = [" ", "/", "-", "(", ")", "&", "'", ",", ".", "+", ":", "\""];
