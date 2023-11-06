@@ -14,3 +14,4 @@ tokio = { version = "1.12.0", features = ["full"] } # for our async runtime
 scraper = "0.18.1"
 regex = "1.10.2"
 rusqlite = "0.29.0"
+prettytable-rs = "0.10.0"
