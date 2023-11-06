@@ -39,3 +39,26 @@ pub async fn extract(url: &str, file_path: &str) -> Result<(), Box<dyn Error>> {
     let html_content: String = response.text().await?;
     extract_from_html_content(&html_content, file_path)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+    #[test]
+    fn test_extract_from_html_content() {
+        let html = r#"
+            <table>
+                <tr><th>Player</th><th>Team</th></tr>
+                <tr><td><a href="/players/a/achiupr01.html">Precious Achiuwa</a></td><td>Miami Heat</td></tr>
+            </table>
+        "#;
+        let file_path = "test.csv";
+
+        extract_from_html_content(html, file_path).unwrap();
+
+        let contents = fs::read_to_string(file_path).unwrap();
+        assert_eq!(contents, "Player,Team\nPrecious Achiuwa,Miami Heat\n");
+
+        fs::remove_file(file_path).unwrap();
+    }
+}
