@@ -1,4 +1,4 @@
-#  Rist SQLite ETL CRUD CLI
+#  Rust SQLite ETL CRUD CLI
 #### By Rakeen Rouf 
 
 [![Build binary release](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/release.yml/badge.svg)](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/release.yml)
