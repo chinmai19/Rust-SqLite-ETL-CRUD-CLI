@@ -14,7 +14,7 @@ Note: Feel free to customize, enhance, and extend the capabilities of this versa
 
 ## Project Architecture
 
-![Alt text](https://user-images.githubusercontent.com/36940292/280939916-ecee2416-e328-46b8-9afd-1b319c981328.png)
+![Alt text](https://user-images.githubusercontent.com/36940292/281111426-7cc28c47-0136-40e0-bdbd-c7d52baf075d.png)
 
 ## Function Descriptions (Located in ~/mylib)
 
@@ -59,33 +59,57 @@ The application accepts several command-line arguments to control its behavior. 
     -V, --version                      Print version information
 
 ## Example Usage
-
+#### `Help` 
 ```
 cargo run -- --help
 ```
-This will show you the help menu.
 
+#### `Extract` 2022-2023 NBA player stats from the Basketball Reference website
 ```
 cargo run -- --extract -u "https://www.basketball-reference.com/leagues/NBA_2023_per_game.html#per_game_stats"
 ```
 
+![Alt text](https://user-images.githubusercontent.com/36940292/281097227-eeda0210-ff2f-4c7e-a8e7-c5fc539f7294.png)
+
+#### `Creating` a new local Sqlite database for the 2022 2023 NBA player stats
 ```
-cargo run -- --extract -u "https://www.basketball-reference.com/leagues/NBA_2023_per_game.html#per_game_stats"
+cargo run -- --transform -c "nba.csv" -d "nba" -m "w"
 ```
 
+![](https://user-images.githubusercontent.com/36940292/281097977-8487c97c-38cb-421d-b84e-7d0a07b01ffc.png)
+
+
+#### `Reading` data from the database
 ```
-cargo run -- --extract -u "https://www.basketball-reference.com/leagues/NBA_2023_per_game.html#per_game_stats"
+cargo run -- --query -q "SELECT Player, MP, FGA, FT, FTA, ORB, DRB FROM nba LIMIT 4" -d "nba"
+```
+![Alt text](https://user-images.githubusercontent.com/36940292/281099411-3065794d-4682-45a0-8791-9fcc93cb48bd.png)
+
+
+#### `Updating` data in the database, where player is Steven Adams
+```
+cargo run -- --update --values "MP=0,FGA=0,FT=0,FTA=0" --condition "Player = 'Steven Adams'""
 ```
 
+![Alt text](https://user-images.githubusercontent.com/36940292/281100809-172ae947-c4da-4e34-b6a7-26d99902e1ae.png)
+
+
+#### `Deleting` all instances where player is Steven Adams
 ```
-cargo run -- --extract -u "https://www.basketball-reference.com/leagues/NBA_2023_per_game.html#per_game_stats"
+cargo run -- --drop -d "nba" --condition "Player = 'Steven Adams'" 
 ```
 
+![Alt text](https://user-images.githubusercontent.com/36940292/281102605-e4e3c9ec-079f-43a0-be38-ecd3554f05e9.png)
 
 ## Performance
 
-This application is written in Rust, which provides several advantages over other languages like Python. Rust programs are generally faster and use less CPU. However, the memory usage can be comparable in some cases, such as when using recursive algorithms that create a large number of stack frames.
+This application is written in Rust, which provides several advantages over other languages like Python. Rust typically offers better CPU and GPU performance compared to Python. This is due to Rust being a statically compiled language, which means it compiles directly to machine code, resulting in less runtime overhead. Rust's low-level control and strict memory management contribute to efficient resource utilization, especially in performance-critical applications. Additionally, Rust's ownership system and safe concurrency features allow for effective utilization of multiple CPU cores. While Python has a rich library ecosystem, Rust's performance advantages make it a compelling choice for projects where speed and resource efficiency are paramount.
 
-### Efficiency and Limitations of SQLite and SQL
+## Rust Error Handling
+
+Rust's approach to error handling sets it apart from many other programming languages. It employs a type called Result, which can signify either a successful outcome (Ok) or an error (Err). This enforces explicit error handling, reducing the chances of overlooking or ignoring potential issues. Rust encourages pattern matching to handle different error cases, ensuring comprehensive error management. The language also provides the ? operator to streamline error propagation, making code more concise and readable. With its robust error handling mechanisms, Rust promotes code reliability and helps developers create more robust and predictable software.
+
+
+## Efficiency and Limitations of SQLite and SQL
 
 SQLite and SQL greatly enhance data analysis efficiency. The lightweight nature of SQLite makes it a fast and accessible choice for smaller projects or local applications. Its simplicity and self-contained architecture streamline setup and deployment. However, for larger datasets (~>280 TB) or scenarios requiring concurrent access from multiple users, more robust database systems may be more suitable. Additionally, while SQLite supports most standard SQL operations, it may have limitations in handling very large datasets or complex operations that some enterprise-level databases can manage more effectively.

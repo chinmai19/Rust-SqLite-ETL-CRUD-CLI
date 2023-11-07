@@ -54,7 +54,7 @@ fn main() {
         .arg(
             Arg::with_name("QUERYSTRING")
                 .short('q')
-                .long("QUERYSTRING")
+                .long("querystring")
                 .value_name("QUERYSTRING")
                 .help("Query String")
                 .takes_value(true),
@@ -62,7 +62,7 @@ fn main() {
         .arg(
             Arg::with_name("CONDITION")
                 .short('i')
-                .long("CONDITION")
+                .long("condition")
                 .value_name("CONDITION")
                 .help("Condtion to drop/update data")
                 .takes_value(true),
@@ -164,12 +164,6 @@ fn main() {
             Err(e) => eprintln!("Drop failed: {} \n", e),
         }
     }
-
-    // let mut update_values = HashMap::new();
-    // update_values.insert("MP".to_string(), "0".to_string());
-    // update_values.insert("FGA".to_string(), "0".to_string());
-    // update_values.insert("FT".to_string(), "0".to_string());
-    // update_values.insert("FTA".to_string(), "0".to_string());
 
     if matches.is_present("UPDATE") {
         let mut update_values = HashMap::new();
