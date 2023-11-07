@@ -113,3 +113,7 @@ Rust's approach to error handling sets it apart from many other programming lang
 ## Efficiency and Limitations of SQLite and SQL
 
 SQLite and SQL greatly enhance data analysis efficiency. The lightweight nature of SQLite makes it a fast and accessible choice for smaller projects or local applications. Its simplicity and self-contained architecture streamline setup and deployment. However, for larger datasets (~>280 TB) or scenarios requiring concurrent access from multiple users, more robust database systems may be more suitable. Additionally, while SQLite supports most standard SQL operations, it may have limitations in handling very large datasets or complex operations that some enterprise-level databases can manage more effectively.
+
+## Note on Generative AI for Rust development
+
+Generative AI, exemplified by tools like OpenAI's Copilot, has proven to be a valuable asset in writing Rust code. Leveraging Copilot's intelligent code suggestions and completions, I was able to efficiently transform my Python SQLite library into Rust. Copilot's ability to understand context and generate syntactically correct Rust code greatly expedited the conversion process. It provided insightful suggestions, improved code readability, and accelerated overall development. By automating routine tasks and offering helpful hints, generative AI like Copilot empowers developers to transition smoothly between programming languages, ultimately enhancing productivity and the quality of the resulting Rust code.
