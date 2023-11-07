@@ -120,19 +120,18 @@ fn main() {
     let db = matches.value_of("DB").unwrap_or("nba");
     let table = matches.value_of("TABLE").unwrap_or("nba");
     let mode = matches.value_of("MODE").unwrap_or("w");
-    let query_string = matches.value_of("QUERYSTRING").unwrap_or(
-        "SELECT Player, MP, FGA, FT, FTA, ORB, DRB FROM nba LIMIT 4",
-    );
+    let query_string = matches
+        .value_of("QUERYSTRING")
+        .unwrap_or("SELECT Player, MP, FGA, FT, FTA, ORB, DRB FROM nba LIMIT 4");
     let condition = matches
         .value_of("CONDITION")
         .unwrap_or("Player = 'Steven Adams'");
-    let update_vals = matches.value_of("UPDATE_VALUES").unwrap_or("MP=0,FGA=0,FT=0,FTA=0");
+    let update_vals = matches
+        .value_of("UPDATE_VALUES")
+        .unwrap_or("MP=0,FGA=0,FT=0,FTA=0");
 
     if matches.is_present("EXTRACT") {
-        match extract::extract(
-            url,
-            csv,
-        ) {
+        match extract::extract(url, csv) {
             Ok(_) => println!("Extraction successful\n"),
             Err(e) => eprintln!("Extraction failed: {}\n", e),
         }
@@ -171,7 +170,7 @@ fn main() {
     // update_values.insert("FGA".to_string(), "0".to_string());
     // update_values.insert("FT".to_string(), "0".to_string());
     // update_values.insert("FTA".to_string(), "0".to_string());
-    
+
     if matches.is_present("UPDATE") {
         let mut update_values = HashMap::new();
         let values = update_vals;
@@ -181,7 +180,7 @@ fn main() {
                 update_values.insert(key.to_string(), value.to_string());
             }
         }
-    
+
         match update_db::update_db(
             drop_data::ConnectionType::DatabaseName(db.to_string()),
             table,
