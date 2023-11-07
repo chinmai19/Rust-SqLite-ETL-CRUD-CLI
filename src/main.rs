@@ -1,14 +1,9 @@
 mod drop_data;
-#[allow(dead_code)]
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(unused_mut)]
-#[allow(unused_assignments)]
-#[allow(unused_must_use)]
-#[allow(unused_parens)]
 mod extract;
 mod query;
 mod transform_load;
+mod update_db;
+use std::collections::HashMap;
 
 fn main() {
     match extract::extract(
@@ -42,7 +37,31 @@ fn main() {
     }
 
     match query::query(
-        "SELECT Player, MP, FGA, FT, FTA, ORB, DRB FROM nba LIMIT 5".to_string(),
+        "SELECT Player, MP, FGA, FT, FTA, ORB, DRB FROM nba LIMIT 4".to_string(),
+        query::ConnectionType::DatabaseName("nba".to_string()),
+    ) {
+        Ok(_) => println!("Query successful\n"),
+        Err(e) => eprintln!("Query failed: {}\n", e),
+    }
+
+    let mut update_values = HashMap::new();
+    update_values.insert("MP".to_string(), "0".to_string());
+    update_values.insert("FGA".to_string(), "0".to_string());
+    update_values.insert("FT".to_string(), "0".to_string());
+    update_values.insert("FTA".to_string(), "0".to_string());
+
+    match update_db::update_db(
+        drop_data::ConnectionType::DatabaseName("nba".to_string()),
+        "nba",
+        "Player = 'Santi Aldama'",
+        update_values,
+    ) {
+        Ok(_) => println!("Update successful\n"),
+        Err(e) => eprintln!("Update failed: {}\n", e),
+    }
+
+    match query::query(
+        "SELECT Player, MP, FGA, FT, FTA, ORB, DRB FROM nba LIMIT 4".to_string(),
         query::ConnectionType::DatabaseName("nba".to_string()),
     ) {
         Ok(_) => println!("Query successful\n"),
