@@ -101,6 +101,21 @@ cargo run -- --drop -d "nba" --condition "Player = 'Steven Adams'"
 
 ![Alt text](https://user-images.githubusercontent.com/36940292/281102605-e4e3c9ec-079f-43a0-be38-ecd3554f05e9.png)
 
+
+## Dependencies
+
+```
+# Download Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+```
+# Navigate to the project folder and install dependencies
+cargo build
+# If the dependencies were already installed ensure they are up-to-date
+cargo update
+```
+
 ## Performance
 
 This application is written in Rust, which provides several advantages over other languages like Python. Rust typically offers better CPU and GPU performance compared to Python. This is due to Rust being a statically compiled language, which means it compiles directly to machine code, resulting in less runtime overhead. Rust's low-level control and strict memory management contribute to efficient resource utilization, especially in performance-critical applications. Additionally, Rust's ownership system and safe concurrency features allow for effective utilization of multiple CPU cores. While Python has a rich library ecosystem, Rust's performance advantages make it a compelling choice for projects where speed and resource efficiency are paramount.
