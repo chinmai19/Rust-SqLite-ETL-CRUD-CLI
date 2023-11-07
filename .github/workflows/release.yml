@@ -1,25 +1,30 @@
-name: Build binary release
+name: Build and Package Rust Binary
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          components: clippy, rustfmt
-          override: true
-      - name: Run Rust Binanry
-        run: make build-release
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Package Binary as Artifact
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+
+    - name: Build Rust Binary
+      run: |
+        cargo build --release
+
+    - name: Package Binary as Artifact
       uses: actions/upload-artifact@v2
       with:
         name: optimized-binary
         path: target/release/project2
-  
