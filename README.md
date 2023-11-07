@@ -4,6 +4,9 @@
 [![Build binary release](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/release.yml/badge.svg)](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/release.yml)
 [![Clippy](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/lint.yml/badge.svg)](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/lint.yml) [![Rustfmt](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/rustfmt.yml/badge.svg)](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/rustfmt.yml) [![Tests](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/tests.yml/badge.svg)](https://github.com/rmr327/Rust-SqLite-ETL-CRUD-CLI/actions/workflows/tests.yml)
 
+**Walk Through Youtube Video**
+[Youtube](https://youtu.be/7OLOccG5UFA)
+
 ## Overview
 
 This project serves as a comprehensive showcase of a `Rust` Command Line Interface (`CLI`) tool tailored for seamless data management. It seamlessly handles the Extract, Transform, and Load (`ETL`) process, efficiently transferring data into a SQLite database. In addition, this repository exemplifies crucial `CRUD` (Create, Read, Update, Delete) operations, offering a holistic understanding of database management.
