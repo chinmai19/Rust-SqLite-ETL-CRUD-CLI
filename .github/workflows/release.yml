@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: optimized-binary
-        path: target/release/project2
+        path: target/release/test_v_python
