@@ -117,3 +117,10 @@ SQLite and SQL greatly enhance data analysis efficiency. The lightweight nature 
 ## Note on Generative AI for Rust development
 
 Generative AI, exemplified by tools like OpenAI's Copilot, has proven to be a valuable asset in writing Rust code. Leveraging Copilot's intelligent code suggestions and completions, I was able to efficiently transform my Python SQLite library into Rust. Copilot's ability to understand context and generate syntactically correct Rust code greatly expedited the conversion process. It provided insightful suggestions, improved code readability, and accelerated overall development. By automating routine tasks and offering helpful hints, generative AI like Copilot empowers developers to transition smoothly between programming languages, ultimately enhancing productivity and the quality of the resulting Rust code.
+
+
+## Optimized Rust Binary
+
+An optimized Rust binary refers to an executable file produced from Rust source code after undergoing various compiler-level optimizations. These optimizations are applied by the Rust compiler during the compilation process to improve the performance and efficiency of the resulting binary. They can include techniques such as inlining functions, removing dead code, reordering instructions for better CPU pipelining, and other transformations aimed at making the program run faster and consume fewer system resources. The result is a binary file that exhibits enhanced performance characteristics compared to an unoptimized build. These optimized binaries are well-suited for deployment in production environments where efficiency and speed are critical concerns. The below binary file can be downloaded from the actions tabs of this repositoty (in the `Build and Package Rust Binary` subtab).
+
+![Alt text](https://user-images.githubusercontent.com/36940292/281120825-56ca1f1e-5cff-4c19-bfc1-7d75762aec22.png)
