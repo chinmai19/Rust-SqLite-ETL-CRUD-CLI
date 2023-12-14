@@ -3,8 +3,10 @@ mod extract;
 mod query;
 mod transform_load;
 mod update_db;
+mod delete;
 use clap::{App, Arg};
 use std::collections::HashMap;
+
 
 fn main() {
     let matches = App::new("NBA Data Processor")
@@ -111,6 +113,14 @@ fn main() {
                 .takes_value(false)
                 .help("Run the update operation"),
         )
+        .arg(
+            Arg::new("delete")
+            .short('l')
+            .long("delete")
+            .takes_value(false)
+            .help("Run the Delete operation"),
+
+        )
         .get_matches();
 
     let url = matches.value_of("URL").unwrap_or(
@@ -162,6 +172,16 @@ fn main() {
         ) {
             Ok(_) => println!("Drop successful\n"),
             Err(e) => eprintln!("Drop failed: {} \n", e),
+        }
+    }
+    if matches.is_present("delete") {
+        match delete::delete(
+            delete::ConnectionType::DatabaseName(db.to_string()),
+            table,
+            
+        ) {
+            Ok(_) => println!("Delete successful\n"),
+            Err(e) => eprintln!("Delete failed: {} \n", e),
         }
     }
 

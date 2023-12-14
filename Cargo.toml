@@ -1,6 +1,6 @@
 [package]
 name = "test_v_python"
-version = "0.1.0"
+version = "0.1.2"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -16,3 +16,4 @@ regex = "1.10.2"
 rusqlite = "0.29.0"
 prettytable-rs = "0.10.0"
 clap = "3.0.0-beta.5"
+
