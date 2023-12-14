@@ -1,5 +1,6 @@
 use csv::Reader;
 use regex::Regex;
+// use rusqlite::types::Type;
 use rusqlite::{params, Connection, Result};
 use std::fs::File;
 use std::io::BufReader;
@@ -18,8 +19,38 @@ fn modify_name(name: String) -> String {
 
     if new_name.is_empty() {
         new_name = "ID".to_string();
-    }
+    };
+    let new_name = match new_name.as_str() {
+        "Tm" => "Team".to_string(),
+        "PTS" => "Points".to_string(),
+        "PF" => "Fouls".to_string(),
+        "TOV" => "Turnovers".to_string(),
+        "BLK" => "Blocks".to_string(),
+        "STL" => "Steals".to_string(),
+        "AST" => "Assists".to_string(),
 
+        "G" => "Games".to_string(),
+        "GS" => "Games_Started".to_string(),
+        "MP" => "Minutes_Played_Per_Game".to_string(),
+        "FG" => "Field_Goals".to_string(),
+        "FGA" => "Field_Goal_Attempts".to_string(),
+        "FT" => "Free_Throws".to_string(),
+        "FTPerc" => "Free_Throws_Perc".to_string(),
+        "FTA" => "Free_Throws_Attempts".to_string(),
+        "ORB" => "Offensive_Rebounds".to_string(),
+        "DRB" => "Defensive_Rebounds".to_string(),
+        "Pos" => "Position".to_string(),
+        "P3" => "Field_Goals_3_point".to_string(),
+        "PA3" => "Goals_3_point_Attempts".to_string(),
+        "P2" => "Field_Goals_2_point".to_string(),
+        "PA2" => "Goals_2_point_Attempts".to_string(),
+        "PPerc2" => "Perc_2_point".to_string(),
+        "eFGPerc" => "Effective_Goal_Perc".to_string(),
+        "TRB" => "Rebounbs".to_string(),
+
+        _ => new_name.to_string(),
+    };
+    println!("{}", new_name);
     new_name
 }
 
@@ -84,7 +115,16 @@ pub fn create_and_load_db(
 
     for result in rdr.records() {
         let record = result?;
-        let values: Vec<String> = record.iter().map(|s| s.to_string()).collect();
+        let values: Vec<String> = record
+            .iter()
+            .map(|s| {
+                if !s.is_empty() {
+                    s.to_string()
+                } else {
+                    "0".to_string()
+                }
+            })
+            .collect();
         let params: Vec<&(dyn rusqlite::ToSql)> =
             values.iter().map(|x| x as &(dyn rusqlite::ToSql)).collect();
         stmt.execute(params.as_slice())?;
